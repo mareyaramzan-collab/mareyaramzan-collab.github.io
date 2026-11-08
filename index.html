@@ -1,0 +1,542 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Maria Bibi Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+/* Layout: sticky slim nav, two-column hero (statement + facts), then ruled sections; projects pair text with media. */
+:root {
+  --bg: #F4F7F6;
+  --surface: #FFFFFF;
+  --fg: #15201D;
+  --muted: #53625D;
+  --line: #D9E2DF;
+  --accent: #0B6B5A;
+  --accent-ink: #FFFFFF;
+  --accent-soft: #E0F0EB;
+  --font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0D1412; --surface: #141D1A; --fg: #E8EFEC; --muted: #9AABA5; --line: #25332F;
+    --accent: #4FD1B0; --accent-ink: #06201A; --accent-soft: #12302A; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0D1412; --surface: #141D1A; --fg: #E8EFEC; --muted: #9AABA5; --line: #25332F;
+  --accent: #4FD1B0; --accent-ink: #06201A; --accent-soft: #12302A; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.6;
+  padding-block: 0 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--bg); }
+a { color: inherit; }
+.wrap { max-width: 1080px; margin-inline: auto; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+/* nav */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bg); border-bottom: 1px solid var(--line); }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 56px; }
+.brand { font-family: var(--font-display); font-weight: 600; font-size: 18px; text-decoration: none; white-space: nowrap; }
+.nav nav { min-width: 0; }
+.nav ul { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; overflow-x: auto; scrollbar-width: none; }
+.nav ul::-webkit-scrollbar { display: none; }
+.nav a.l { font-size: 14px; color: var(--muted); text-decoration: none; white-space: nowrap; }
+.nav a.l:hover { color: var(--accent); }
+
+/* type */
+h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.15; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+h1 { font-size: clamp(40px, 7vw, 68px); }
+h2 { font-size: clamp(28px, 4vw, 36px); }
+h3 { font-size: 24px; }
+p { margin: 0; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.muted { color: var(--muted); }
+
+/* hero */
+.hero { padding-block: 56px 48px; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+.hero .role { margin-top: 14px; font-size: 20px; color: var(--accent); font-weight: 500; }
+.hero .lede { margin-top: 20px; max-width: 56ch; font-size: 18px; color: var(--muted); }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); font-size: 15px; font-weight: 500; text-decoration: none; cursor: pointer; font-family: inherit; color: var(--fg); }
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.primary:hover { color: var(--accent-ink); filter: brightness(1.08); }
+.btn svg { width: 16px; height: 16px; fill: currentColor; }
+.facts { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 24px; display: grid; gap: 18px; }
+.facts div { display: grid; gap: 2px; }
+.facts dt { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.facts dd { margin: 0; font-weight: 500; }
+.facts dl { margin: 0; display: grid; gap: 16px; }
+
+/* sections */
+section { padding-block: 56px; border-top: 1px solid var(--line); }
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; margin-bottom: 32px; }
+.sec-head p { color: var(--muted); max-width: 52ch; }
+
+/* timeline rows */
+.row { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 8px 32px; padding-block: 24px; border-top: 1px solid var(--line); }
+.row:first-of-type { border-top: 0; padding-top: 0; }
+.row .when { font-family: var(--font-mono); font-size: 13px; color: var(--muted); padding-top: 4px; }
+.row h3 { font-size: 21px; }
+.row .org { margin-top: 4px; color: var(--muted); }
+.row ul { margin: 14px 0 0; padding-left: 18px; display: grid; gap: 8px; }
+.row li::marker { color: var(--accent); }
+
+/* projects */
+.project { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 40px; padding-block: 40px; border-top: 1px solid var(--line); }
+.project:first-of-type { border-top: 0; padding-top: 0; }
+.project .txt { display: grid; gap: 16px; align-content: start; }
+.project .txt dl { margin: 0; display: grid; gap: 14px; }
+.project .txt dt { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.project .txt dd { margin: 2px 0 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 0; list-style: none; }
+.chips li { font-family: var(--font-mono); font-size: 12px; padding: 3px 9px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+.media { display: grid; gap: 12px; align-content: start; min-width: 0; }
+video { width: 100%; border-radius: 10px; border: 1px solid var(--line); background: #000; display: block; }
+.shots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.shot { padding: 0; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--surface); cursor: zoom-in; aspect-ratio: 4 / 3; display: block; }
+.shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform .25s; }
+.shot:hover img { transform: scale(1.04); }
+.caption { font-size: 13px; color: var(--muted); }
+
+.shots.phones { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.shot.tall { aspect-ratio: 9 / 16; }
+.lb .pages { display: grid; gap: 12px; max-width: min(820px, 100%); }
+.lb .pages img { max-height: none; width: 100%; }
+.lb.cvmode { place-items: start center; overflow-y: auto; }
+.shots.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.phone { border: 1px solid var(--line); border-radius: 22px; background: var(--surface); padding: 10px; max-width: 360px; width: 100%; margin-inline: auto; }
+.phone .screen { max-height: 560px; overflow-y: auto; border-radius: 14px; border: 1px solid var(--line); background: #fff; }
+.phone .screen img { width: 100%; display: block; }
+.pitch { font-family: var(--font-display); font-size: 20px; line-height: 1.4; color: var(--fg); }
+.cert-img { padding: 0; border: 0; background: none; cursor: zoom-in; display: block; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 4 / 3; margin-bottom: 8px; }
+.cert-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+/* parcel flow */
+.flow { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 24px; display: grid; gap: 14px; }
+.flow-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; align-items: stretch; }
+.node { border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; font-size: 14px; background: var(--bg); position: relative; }
+.node b { display: block; font-weight: 600; margin-bottom: 2px; }
+.node span { color: var(--muted); font-size: 13px; }
+.node.mine { border-color: var(--accent); background: var(--accent-soft); }
+.node.mine em { font-style: normal; font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 4px; }
+.flow-row.under { grid-template-columns: 1fr 1fr; padding-inline: 16.6%; }
+.arrow { text-align: center; color: var(--muted); font-family: var(--font-mono); font-size: 12px; }
+
+/* small project cards */
+.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 8px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px; display: grid; gap: 10px; align-content: start; }
+.card h3 { font-size: 19px; }
+.card p { color: var(--muted); font-size: 15px; }
+.also { margin-top: 24px; }
+.also .chips li { background: var(--surface); border: 1px solid var(--line); color: var(--fg); }
+
+/* skills */
+.skills { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 32px; }
+.skills h3 { font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.skills p { font-size: 15px; }
+
+/* certs */
+.certs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.cert { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; display: grid; gap: 6px; align-content: start; }
+.cert h3 { font-size: 18px; }
+.cert .eyebrow { color: var(--accent); }
+.cert p { font-size: 14px; color: var(--muted); }
+.twocol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }
+.twocol h3 { font-size: 21px; margin-bottom: 4px; }
+.twocol ul { margin: 14px 0 0; padding-left: 18px; display: grid; gap: 8px; }
+.twocol li::marker { color: var(--accent); }
+
+/* contact */
+.contact { display: grid; gap: 20px; }
+.contact .big { font-family: var(--font-display); font-size: clamp(26px, 4vw, 40px); font-weight: 600; line-height: 1.2; max-width: 32ch; text-wrap: balance; }
+.mail { display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.mail code { font-family: var(--font-mono); font-size: 15px; user-select: all; }
+footer { padding-top: 32px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+
+/* lightbox */
+.lb { position: fixed; inset: 0; z-index: 50; background: rgba(5, 10, 9, .88); display: grid; place-items: center; padding: 24px; }
+.lb[hidden] { display: none !important; }
+.lb figure { margin: 0; max-width: min(1100px, 100%); display: grid; gap: 10px; }
+.lb img { max-height: 80vh; width: auto; max-width: 100%; border-radius: 8px; margin-inline: auto; }
+.lb figcaption { color: #E8EFEC; font-size: 14px; text-align: center; }
+.lb button { position: fixed; z-index: 2; top: max(16px, env(safe-area-inset-top, 0px)); right: 16px; background: #fff; color: #111; border: 0; border-radius: 8px; padding: 8px 14px; font: 500 14px var(--font-body); cursor: pointer; }
+
+@media (max-width: 860px) {
+  .hero, .project, .twocol { grid-template-columns: minmax(0, 1fr); }
+  .hero { gap: 32px; padding-block: 40px 32px; }
+  .row { grid-template-columns: minmax(0, 1fr); }
+  .skills, .certs { grid-template-columns: minmax(0, 1fr); }
+  .cards { grid-template-columns: minmax(0, 1fr); }
+  .nav ul { gap: 16px; }
+  .nav .brand { display: none; }
+  .shots.four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .shots.phones { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+  .flow-row, .flow-row.under { grid-template-columns: minmax(0, 1fr); padding-inline: 0; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .shot img { transition: none; } }
+</style>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">Maria Bibi</a>
+    <nav aria-label="Sections"><ul>
+      <li><a class="l" href="#education">Education</a></li>
+      <li><a class="l" href="#experience">Experience</a></li>
+      <li><a class="l" href="#projects">Projects</a></li>
+      <li><a class="l" href="#skills">Skills</a></li>
+      <li><a class="l" href="#recognition">Certificates</a></li>
+      <li><a class="l" href="#community">Community</a></li>
+      <li><a class="l" href="#contact">Contact</a></li>
+    </ul></nav>
+  </div>
+</header>
+
+<main class="wrap" id="top">
+  <div class="hero">
+    <div>
+      <p class="eyebrow">Portfolio</p>
+      <h1 style="margin-top:12px">Maria Bibi</h1>
+      <p class="role">Software Engineer · Applied AI &amp; Computer Vision</p>
+      <p class="lede">I build applied AI systems, from computer-vision pipelines and machine-learning models to LLM applications, with the mobile and backend software around them. BS Software Engineering graduate from Islamabad, open to Master's and research opportunities abroad.</p>
+      <div class="actions">
+        <button class="btn primary" type="button" data-pages="img/cv-1.jpg,img/cv-2.jpg" data-cap="Curriculum vitae of Maria Bibi">View CV</button>
+        <a class="btn" href="https://www.linkedin.com/in/mariaramzan" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.6h.06c.53-1 1.82-2.05 3.75-2.05 4 0 4.74 2.63 4.74 6.05V21h-4v-5.2c0-1.24-.02-2.84-1.73-2.84-1.73 0-2 1.35-2 2.75V21h-4z"/></svg>
+          LinkedIn</a>
+        <a class="btn" href="https://github.com/mareyaramzan-collab" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+          GitHub</a>
+        <a class="btn" href="#contact">Contact</a>
+      </div>
+    </div>
+    <aside class="facts" aria-label="At a glance">
+      <dl>
+        <div><dt>Degree</dt><dd>BS Software Engineering, IIUI (2022 – 2026)</dd></div>
+        <div><dt>Focus</dt><dd>Applied AI, computer vision, machine learning, LLM applications</dd></div>
+        <div><dt>CGPA</dt><dd>3.33 (grade B+)</dd></div>
+        <div><dt>Based in</dt><dd>Islamabad, Pakistan</dd></div>
+      </dl>
+    </aside>
+  </div>
+
+  <section id="education">
+    <div class="sec-head"><h2>Education</h2></div>
+    <div class="row">
+      <div class="when">2022 – 2026</div>
+      <div>
+        <h3>BS Software Engineering</h3>
+        <p class="org"><a href="https://www.iiu.edu.pk" target="_blank" rel="noopener">International Islamic University (IIUI)</a>, Islamabad, Pakistan</p>
+        <ul>
+          <li>CGPA 3.33 (grade B+).</li>
+          <li>Coursework: object-oriented programming, data structures and algorithms, computer networking, human-computer interaction.</li>
+          <li>Final year project: <a href="#chores">Online Chores App</a>, a Flutter platform with AI-based sentiment analysis, supervised by Dr. Saima Imtiaz. Selected to show a working prototype at a Job Fair.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="sec-head"><h2>Experience</h2></div>
+    <div class="row">
+      <div class="when">Jun – Aug 2026</div>
+      <div>
+        <h3>Full Stack Intern</h3>
+        <p class="org">Genesys Research Lab, FAST University, Islamabad</p>
+        <ul>
+          <li>Built the Flutter client for <a href="#parceliq">ParcelIQ</a>, a parcel dimensioning and QA scanner, using Riverpod, GoRouter and Dio with token-refresh interceptors.</li>
+          <li>Worked with the backend and computer-vision tracks on the full system: FastAPI endpoints, PostgreSQL with JSONB, JWT authentication and YOLO-based damage and dimension inspection.</li>
+          <li>Designed a real-time sign-language fingerspelling trainer using MediaPipe landmarks and SVM/MLP classifiers.</li>
+          <li>Built an LLM-powered listing assistant for HuntCart (Claude API) and a document Q&amp;A chatbot using RAG with LangChain and LangGraph.</li>
+          <li>Completed the TechGenesys workshop on Edge Computing, LiDAR and Computer Vision, and AI Automation (18 Jul 2026).</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="when">7 Jul – 22 Aug 2025</div>
+      <div>
+        <h3>Mobile App Development Intern</h3>
+        <p class="org">Sybrid Private Limited, a Lakson Group Company · Corp Dev Engineering</p>
+        <ul>
+          <li>Built Flutter screens and reusable UI components, integrated APIs and managed app state.</li>
+          <li>Developed demo projects to explore debugging, testing and code optimisation, and worked with the team on requirements and workflow.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="sec-head">
+      <h2>Projects</h2>
+      <p>Four projects in detail, then smaller builds.</p>
+    </div>
+
+    <article class="project" id="parceliq">
+      <div class="txt">
+        <div>
+          <p class="eyebrow">Internship project · 2026</p>
+          <h3 style="margin-top:8px">ParcelIQ: Smart Mobile Parcel Dimensioning &amp; QA Scanner</h3>
+        </div>
+        <dl>
+          <div><dt>Problem</dt><dd>Parcel intake and quality checks need fast, consistent dimensioning and damage inspection.</dd></div>
+          <div><dt>What it does</dt><dd>Staff scan barcodes and QR codes, capture a parcel, and the server returns dimensions and a damage inspection. Shipping labels are read on demand with OCR.</dd></div>
+          <div><dt>My role</dt><dd>I built the Flutter client with role-aware screens for scan queues, QA queues, notifications and profiles, against a frozen FastAPI contract.</dd></div>
+        </dl>
+        <ul class="chips"><li>Flutter</li><li>Riverpod</li><li>GoRouter</li><li>Dio</li><li>FastAPI</li><li>PostgreSQL</li><li>JWT</li><li>YOLO</li></ul>
+      </div>
+      <div class="media">
+        <div class="flow" role="img" aria-label="System overview: Flutter client talks to a FastAPI backend, which uses PostgreSQL and computer-vision services">
+          <p class="eyebrow">System overview</p>
+          <div class="flow-row">
+            <div class="node mine"><em>My work</em><b>Flutter client</b><span>Scan, intake, QA queues, notifications. Riverpod, GoRouter, Dio</span></div>
+            <div class="node"><b>FastAPI backend</b><span>REST API, JWT auth, organisations and employee roles</span></div>
+            <div class="node"><b>PostgreSQL</b><span>Relational tables with JSONB inspection data</span></div>
+          </div>
+          <p class="arrow">↑ backend calls ↑</p>
+          <div class="flow-row under">
+            <div class="node"><b>Computer vision</b><span>YOLO dimensioning and damage inspection</span></div>
+            <div class="node"><b>Label OCR</b><span>On-demand shipping-label reading</span></div>
+          </div>
+        </div>
+        <p class="caption">System overview, simplified from the project design. App screens below: select one to enlarge.</p>
+        <div class="shots phones"><button class="shot tall" type="button" data-full="img/pq-login.jpg" data-cap="Login screen of ParcelIQ, a logistics intelligence system."><img src="img/pq-login.jpg" alt="ParcelIQ Login screen" loading="lazy"></button><button class="shot tall" type="button" data-full="img/pq-home.jpg" data-cap="Home dashboard with scan totals and quick actions: scan, search and register a parcel."><img src="img/pq-home.jpg" alt="ParcelIQ Dashboard screen" loading="lazy"></button><button class="shot tall" type="button" data-full="img/pq-confirm-scan.jpg" data-cap="Confirm Scan: inspection photo attached, tracking ID, status and optional note."><img src="img/pq-confirm-scan.jpg" alt="ParcelIQ Confirm scan screen" loading="lazy"></button><button class="shot tall" type="button" data-full="img/pq-inspection.jpg" data-cap="Scan details with AI damage inspection result: condition, confidence and overlay."><img src="img/pq-inspection.jpg" alt="ParcelIQ AI inspection screen" loading="lazy"></button><button class="shot tall" type="button" data-full="img/pq-ocr.jpg" data-cap="Review Parcel after label OCR: tracking ID and dimensions filled in automatically."><img src="img/pq-ocr.jpg" alt="ParcelIQ Label OCR screen" loading="lazy"></button><button class="shot tall" type="button" data-full="img/pq-registered.jpg" data-cap="Parcel Registered confirmation with tracking ID, condition and dimensions."><img src="img/pq-registered.jpg" alt="ParcelIQ Registered screen" loading="lazy"></button><button class="shot tall" type="button" data-full="img/pq-statuses.jpg" data-cap="Parcel details with status transitions from registered to exception."><img src="img/pq-statuses.jpg" alt="ParcelIQ Status history screen" loading="lazy"></button><button class="shot tall" type="button" data-full="img/pq-history.jpg" data-cap="Scan history list with tracking IDs and statuses."><img src="img/pq-history.jpg" alt="ParcelIQ History screen" loading="lazy"></button></div>
+      </div>
+    </article>
+
+    <article class="project" id="chores">
+      <div class="txt">
+        <div>
+          <p class="eyebrow">Final year project · 2025 – 2026 · Team of 3</p>
+          <h3 style="margin-top:8px">Sahulat Ghar: Online Chores App</h3>
+        </div>
+        <dl>
+          <div><dt>Problem</dt><dd>Finding household help (electricians, plumbers, painters, maids) is slow, prices are unclear and workers are hard to verify.</dd></div>
+          <div><dt>What it does</dt><dd>A mobile platform with worker verification, custom price proposals for complex jobs, live location tracking, chat with automatic translation between Urdu, Roman Urdu and English, secure payments and reviews. AI modules cover job recommendations, a chatbot, fraud detection and sentiment analysis.</dd></div>
+          <div><dt>My role</dt><dd>Flutter front end, feature design and the sentiment analysis component in Python with TextBlob. Supervised by Dr. Saima Imtiaz, IIUI. Selected for a Job Fair prototype showcase.</dd></div>
+        </dl>
+        <ul class="chips"><li>Flutter</li><li>Dart</li><li>Python</li><li>Django</li><li>Firebase</li><li>MySQL</li><li>TextBlob</li></ul>
+      </div>
+      <div class="media">
+        <video controls preload="metadata" poster="img/fyp-2.jpg" aria-label="Demo of the Online Chores App">
+          <source src="media/fyp-demo.mp4" type="video/mp4">
+        </video>
+        <p class="caption">Demo walkthrough (1 min 38 s): worker, customer and admin dashboards.</p>
+        <div class="shots four">
+          <button class="shot" type="button" data-full="img/poster-sahulat.jpg" data-cap="Project poster: Sahulat Ghar, Department of Software Engineering, IIUI."><img src="img/poster-sahulat.jpg" alt="Sahulat Ghar project poster" loading="lazy"></button>
+          <button class="shot" type="button" data-full="img/fyp-1.jpg" data-cap="Customer side: popular services such as ceiling fan fix and tap leakage, with worker chat."><img src="img/fyp-1.jpg" alt="Worker chat and customer service list" loading="lazy"></button>
+          <button class="shot" type="button" data-full="img/fyp-2.jpg" data-cap="Translating a repair description from Urdu into English before posting the job."><img src="img/fyp-2.jpg" alt="Urdu job description with translate option" loading="lazy"></button>
+          <button class="shot" type="button" data-full="img/fyp-3.jpg" data-cap="Worker submits a final price proposal; customer sees the booking details."><img src="img/fyp-3.jpg" alt="Price proposal and booking details" loading="lazy"></button>
+        </div>
+      </div>
+    </article>
+
+    <article class="project" id="traffic">
+      <div class="txt">
+        <div>
+          <p class="eyebrow">AI project · 2026</p>
+          <h3 style="margin-top:8px">Intelligent Traffic Safety Monitoring &amp; Accident Detection System</h3>
+        </div>
+        <dl>
+          <div><dt>Problem</dt><dd>Road-safety monitoring needs both detection of violations as they happen and an estimate of where risk is highest.</dd></div>
+          <div><dt>What it does</dt><dd>Detects traffic violations such as missing helmets and accidents from video or a webcam, crops plate and subject evidence, and predicts accident and violation risk from location, density, weather and hour of day. SHAP and LIME explain each prediction.</dd></div>
+          <div><dt>Approach</dt><dd>YOLOv8 for detection, a CNN and XGBoost for classification and risk, Tesseract OCR for plates, and generative AI APIs, all shown in an interactive dashboard.</dd></div>
+        </dl>
+        <ul class="chips"><li>Python</li><li>YOLOv8</li><li>CNN</li><li>XGBoost</li><li>OpenCV</li><li>Tesseract OCR</li><li>SHAP</li><li>LIME</li></ul>
+      </div>
+      <div class="media">
+        <video controls preload="metadata" poster="img/traffic-3.jpg" aria-label="Demo of the traffic safety monitoring system">
+          <source src="media/traffic-demo.mp4" type="video/mp4">
+        </video>
+        <p class="caption">Demo walkthrough (1 min 55 s): helmet violation and accident detection.</p>
+        <div class="shots">
+          <button class="shot" type="button" data-full="img/traffic-1.jpg" data-cap="Predictive analytics: accident and violation risk with SHAP/LIME explanations."><img src="img/traffic-1.jpg" alt="Predictive analytics dashboard with SHAP chart" loading="lazy"></button>
+          <button class="shot" type="button" data-full="img/traffic-2.jpg" data-cap="Risk prediction for a rainy-weather scenario, with model comparison metrics."><img src="img/traffic-2.jpg" alt="Risk prediction under rainy weather" loading="lazy"></button>
+          <button class="shot" type="button" data-full="img/traffic-3.jpg" data-cap="Live helmet violation detection on uploaded video, with localized evidence."><img src="img/traffic-3.jpg" alt="Helmet violation detected on a motorcycle" loading="lazy"></button>
+        </div>
+      </div>
+    </article>
+
+    <article class="project" id="tradetalent">
+      <div class="txt">
+        <div>
+          <p class="eyebrow">UI/UX design · Figma</p>
+          <h3 style="margin-top:8px">Trade Talent</h3>
+        </div>
+        <p class="pitch">Learn a skill in minutes, teach one in return. No fees, no formal courses.</p>
+        <dl>
+          <div><dt>Idea</dt><dd>A community-driven mobile app for peer-to-peer skill sharing. Instead of paid learning platforms, users have short, flexible, collaborative sessions where everyone can both teach and learn.</dd></div>
+          <div><dt>Examples</dt><dd>Learn a guitar chord in a few minutes, collaborate on a small creative project, or offer digital skills for social causes.</dd></div>
+          <div><dt>Wireframe</dt><dd>The home screen brings together suggested matches with ratings, quick actions (find skills, arrange a session, skill journal, AI feedback), 15 to 20 minute micro-skills, online and offline collaboration projects, and nearby offline skill exchange.</dd></div>
+        </dl>
+        <ul class="chips"><li>Figma</li><li>Wireframing</li><li>HCI</li><li>Mobile UX</li></ul>
+      </div>
+      <div class="media">
+        <div class="phone"><div class="screen"><img src="img/wireframe-trade-talent.jpg" alt="Trade Talent home screen wireframe" loading="lazy"></div></div>
+        <p class="caption" style="text-align:center">Home screen wireframe. Scroll inside the phone to see all of it.</p>
+      </div>
+    </article>
+
+    <article class="project" id="signlang">
+      <div class="txt">
+        <div>
+          <p class="eyebrow">AI project · 2026 · Genesys Research Lab</p>
+          <h3 style="margin-top:8px">Sign Language Fingerspelling Trainer</h3>
+        </div>
+        <dl>
+          <div><dt>What it does</dt><dd>Real-time hand-shape recognition for static ASL and PSL letters, with a live trainer and guided drills that show confidence feedback as you sign.</dd></div>
+          <div><dt>Approach</dt><dd>MediaPipe hand landmarks feed a normalised joint-angle pipeline into SVM and MLP classifiers.</dd></div>
+        </dl>
+        <ul class="chips"><li>MediaPipe</li><li>scikit-learn</li><li>SVM / MLP</li></ul>
+      </div>
+      <div class="media">
+        <video controls preload="metadata" poster="img/sign-poster.jpg" aria-label="Demo of the Sign Language Fingerspelling Trainer">
+          <source src="media/sign-language-demo.mp4" type="video/mp4">
+        </video>
+        <p class="caption">Demo walkthrough (1 min 59 s): live fingerspelling recognition and guided drills.</p>
+      </div>
+    </article>
+
+    <div class="cards">
+      <div class="card">
+        <p class="eyebrow">2026 · Genesys Research Lab</p>
+        <h3>Document Q&amp;A Chatbot (RAG)</h3>
+        <p>Answers questions directly from uploaded documents by combining vector retrieval with an LLM, so responses stay grounded in the source text.</p>
+        <ul class="chips"><li>LangChain</li><li>LangGraph</li><li>RAG</li></ul>
+      </div>
+      <div class="card">
+        <p class="eyebrow">2026 · Genesys Research Lab</p>
+        <h3>AI Listing Assistant for HuntCart</h3>
+        <p>Generates product titles, descriptions and category suggestions from seller keywords with the Claude API. Results pre-fill the product form for editing, with error handling and usage logging.</p>
+        <ul class="chips"><li>Claude API</li><li>Prompt engineering</li><li>Flutter</li></ul>
+      </div>
+      <div class="card">
+        <p class="eyebrow">Self-driven</p>
+        <h3>Deep Fake News Detection</h3>
+        <p>A machine-learning model in Python that classifies news content as fake or genuine.</p>
+        <ul class="chips"><li>Python</li><li>Machine learning</li></ul>
+      </div>
+    </div>
+    <div class="also">
+      <p class="eyebrow" style="margin-bottom:10px">Other builds</p>
+      <ul class="chips"><li>Online Book Store (C++)</li><li>Library Management System (C++)</li><li>Visual Art Gallery (WordPress)</li><li>WeatherCast Live</li><li>Welfare Management System (web, Oracle DB)</li><li>HCI-based UI/UX design (Figma)</li></ul>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="sec-head"><h2>Technical skills</h2></div>
+    <div class="skills">
+      <div><h3>Languages</h3><p>Python, C++, Dart, JavaScript, SQL</p></div>
+      <div><h3>Mobile</h3><p>Flutter, Dart, Firebase, state management, REST API integration</p></div>
+      <div><h3>Backend and data</h3><p>FastAPI, REST API design, JWT authentication, PostgreSQL, MongoDB, Oracle DB</p></div>
+      <div><h3>AI and computer vision</h3><p>OpenCV, MediaPipe, YOLOv8, scikit-learn, TextBlob</p></div>
+      <div><h3>LLM and GenAI</h3><p>LangChain, LangGraph, retrieval-augmented generation, Claude API, prompt engineering</p></div>
+      <div><h3>Tools</h3><p>Git, Postman, Figma, MATLAB, Wireshark, Cisco Packet Tracer</p></div>
+    </div>
+  </section>
+
+  <section id="recognition">
+    <div class="sec-head"><h2>Certificates and recognition</h2><p>Select an image to enlarge.</p></div>
+    <div class="certs">
+      <div class="cert"><button class="cert-img" type="button" data-full="img/cert-genesys-internship.jpg" data-cap="Certificate of Internship, Full Stack Developer Intern, Genesys Research Lab, 1 June to 7 August 2026."><img src="img/cert-genesys-internship.jpg" alt="Genesys Research Lab internship certificate"></button><p class="eyebrow">Jun – Aug 2026</p><h3>Full Stack Developer Internship</h3><p>Certificate of Internship for outstanding performance, Genesys Research Lab.</p></div>
+      <div class="cert"><button class="cert-img" type="button" data-full="img/cert-sybrid.jpg" data-cap="Internship letter from Sybrid (Pvt.) Ltd., a Lakson Group Company, 7 July to 22 August 2025."><img src="img/cert-sybrid.jpg" alt="Sybrid internship letter"></button><p class="eyebrow">Jul – Aug 2025</p><h3>Mobile App Development Intern</h3><p>Internship letter, Corp Dev Engineering, Sybrid (a Lakson Group Company).</p></div>
+      <div class="cert"><button class="cert-img" type="button" data-full="img/cert-workshop.jpg" data-cap="Certificate of Participation, Edge Computing Fundamentals workshop, Genesys Research Lab, 10 July 2026."><img src="img/cert-workshop.jpg" alt="Edge Computing Fundamentals workshop certificate"></button><p class="eyebrow">10 Jul 2026</p><h3>Edge Computing Fundamentals</h3><p>Certificate of Participation for a hands-on workshop at Genesys Research Lab.</p></div>
+      <div class="cert"><p class="eyebrow">Online course</p><h3>CS50: Introduction to Computer Science with Python</h3><p>Course certificate.</p></div>
+      <div class="cert"><p class="eyebrow">Recognition</p><h3>Job Fair selection</h3><p>Chosen to showcase the working prototype of Sahulat Ghar, the Online Chores App.</p></div>
+    </div>
+  </section>
+
+  <section id="community">
+    <div class="sec-head"><h2>Teaching and volunteering</h2></div>
+    <div class="twocol">
+      <div>
+        <h3>Part-time tutor</h3>
+        <p class="muted">During university studies</p>
+        <ul>
+          <li>Gave academic support and explained course concepts clearly to students.</li>
+          <li>Prepared lessons and guided students through assignments and exam preparation.</li>
+          <li>Built communication, time-management and mentoring skills.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Orphanage social work project</h3>
+        <p class="muted">Volunteer organiser</p>
+        <ul>
+          <li>Ran online and in-person fundraising campaigns.</li>
+          <li>Coordinated gift preparation and distribution for 51 children across two orphanages.</li>
+          <li>Organised interactive activities to encourage creativity.</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:32px"><span class="eyebrow">Languages</span><br>English (intermediate: reading, writing, speaking) · Urdu (native)</p>
+  </section>
+
+  <section id="contact">
+    <div class="contact">
+      <p class="eyebrow">Contact</p>
+      <p class="big">Open to Master's and research opportunities abroad.</p>
+      <div class="mail">
+        <code id="mail">mareya.ramzan@gmail.com</code>
+        <button class="btn" id="copy" type="button">Copy email</button>
+      </div>
+      <div class="actions" style="margin-top:0">
+        <button class="btn primary" type="button" data-pages="img/cv-1.jpg,img/cv-2.jpg" data-cap="Curriculum vitae of Maria Bibi">View CV</button>
+        <a class="btn" href="https://www.linkedin.com/in/mariaramzan" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn" href="https://github.com/mareyaramzan-collab" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+    <footer style="margin-top:48px">Maria Bibi · Islamabad, Pakistan</footer>
+  </section>
+</main>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Screenshot viewer">
+  <button type="button" id="lbx">Close</button>
+  <figure><img id="lbi" alt=""><div class="pages" id="lbp" hidden></div><figcaption id="lbc"></figcaption></figure>
+</div>
+
+<script>
+(function () {
+  var lb = document.getElementById('lb'), img = document.getElementById('lbi'), cap = document.getElementById('lbc'), pg = document.getElementById('lbp');
+  function close() { lb.hidden = true; lb.classList.remove('cvmode'); img.removeAttribute('src'); pg.innerHTML = ''; pg.hidden = true; img.hidden = false; }
+  document.querySelectorAll('[data-full]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      img.hidden = false; pg.hidden = true; pg.innerHTML = '';
+      img.src = b.dataset.full; img.alt = b.querySelector('img').alt; cap.textContent = b.dataset.cap; lb.hidden = false;
+      document.getElementById('lbx').focus();
+    });
+  });
+  document.querySelectorAll('[data-pages]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      img.hidden = true; img.removeAttribute('src'); pg.innerHTML = '';
+      b.dataset.pages.split(',').forEach(function (src, n) {
+        var im = document.createElement('img'); im.src = src; im.alt = 'CV page ' + (n + 1); pg.appendChild(im);
+      });
+      pg.hidden = false; cap.textContent = b.dataset.cap; lb.classList.add('cvmode'); lb.hidden = false;
+      document.getElementById('lbx').focus();
+    });
+  });
+  lb.addEventListener('click', function (e) { if (e.target === lb || e.target.id === 'lbx') close(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !lb.hidden) close(); });
+
+  var btn = document.getElementById('copy'), mail = document.getElementById('mail');
+  btn.addEventListener('click', function () {
+    function done() { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy email'; }, 1800); }
+    function fallback() {
+      var r = document.createRange(); r.selectNodeContents(mail);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Press Ctrl+C';
+    }
+    try { navigator.clipboard.writeText(mail.textContent).then(done, fallback); } catch (e) { fallback(); }
+  });
+})();
+</script>
+
+</body></html>
