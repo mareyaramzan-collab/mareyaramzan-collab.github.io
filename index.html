@@ -11,7 +11,11 @@
   .sd-card ul{margin:.25rem 0 0;padding-left:1.1rem}
   .sd-tags{display:flex;flex-wrap:wrap;gap:.4rem;list-style:none;padding:0!important;margin:.9rem 0 0!important}
   .sd-tags li{border:1px solid rgba(128,128,128,.45);border-radius:999px;padding:.15rem .65rem;font-size:.8rem}
-  .sd-card video{width:100%;border-radius:8px;margin-top:1rem;background:#000}
+  .sd-media{display:flex;gap:1rem;align-items:flex-start;flex-wrap:wrap;margin-top:1rem}
+  .sd-card .sd-media video.sd-video{display:block!important;width:180px!important;max-width:100%!important;height:auto!important;max-height:320px!important;aspect-ratio:auto!important;object-fit:contain;margin:0!important;border-radius:8px;background:#000;flex:0 0 auto}
+  .sd-shots{display:grid;grid-template-columns:repeat(2,80px);gap:.5rem}
+  .sd-shots a{display:block}
+  .sd-card .sd-shots img{width:80px!important;height:auto!important;max-width:100%;border-radius:6px;border:1px solid rgba(128,128,128,.35);display:block;margin:0}
   .sd-cap{font-size:.8rem;opacity:.7;margin:.35rem 0 0}
   @media(max-width:760px){.sd-grid{grid-template-columns:1fr}}
 </style>
@@ -32,7 +36,15 @@
 
       <ul class="sd-tags"><li>Flutter</li><li>Dart</li><li>State management</li></ul>
 
-      <video controls preload="metadata" playsinline src="media/home_automation.mp4#t=0.1"></video>
+      <div class="sd-media">
+        <video class="sd-video" controls preload="metadata" playsinline src="media/home_automation.mp4#t=0.1"></video>
+        <div class="sd-shots">
+        <a href="img/home_automation-1.jpg" target="_blank"><img src="img/home_automation-1.jpg" alt="Smart Home Automation screen 1" loading="lazy"></a>
+        <a href="img/home_automation-2.jpg" target="_blank"><img src="img/home_automation-2.jpg" alt="Smart Home Automation screen 2" loading="lazy"></a>
+        <a href="img/home_automation-3.jpg" target="_blank"><img src="img/home_automation-3.jpg" alt="Smart Home Automation screen 3" loading="lazy"></a>
+        <a href="img/home_automation-4.jpg" target="_blank"><img src="img/home_automation-4.jpg" alt="Smart Home Automation screen 4" loading="lazy"></a>
+        </div>
+      </div>
       <p class="sd-cap">Demo walkthrough: cost estimator, earnings tracker and payroll.</p>
     </article>
 
